@@ -8,25 +8,34 @@ const ComputerModel = ({ isMobile }) => {
   const { scene } = useGLTF('./desktop_pc/scene.gltf');
 
   return (
-    <mesh>
-      <ambientLight intensity={0.4} />
+    <>
+      <ambientLight intensity={0.6} />
       <hemisphereLight intensity={1.5} groundColor="black" />
-      <pointLight intensity={1.5} color="white" />
+      <pointLight position={[0, 2, 0]} intensity={3} color="white" />
+      <pointLight position={[2, 2, 2]} intensity={2} color="white" />
+      <pointLight position={[0, 3, -3]} intensity={1.5} color="white" />
       <spotLight
         position={[-20, 50, 10]}
         angle={0.12}
         penumbra={1}
         intensity={1.5}
         castShadow
-        shadow-mapSize={2048} // Increased shadow map size for better quality
+        shadow-mapSize={2048}
+      />
+      <spotLight
+        position={[0, 5, 0]}
+        angle={0.5}
+        penumbra={1}
+        intensity={2}
+        castShadow
       />
       <primitive
         object={scene}
-        scale={isMobile ? 0.7 : 0.75} // corrected typo here
-        position={isMobile ? [0, -3, 2.2] : [0, -3.25, -1.5]}
+        scale={isMobile ? 0.7 : 0.75}
+        position={isMobile ? [0, -3, 0] : [0, -3.25, -1.5]}
         rotation={[-0.01, -0.2, -0.1]}
       />
-    </mesh>
+    </>
   );
 };
 
